@@ -122,6 +122,14 @@ Each decision is captured as a **thread** containing one or more **nodes**.
 
 ### Decision Thread (`threads/{date}-{slug}.json`):
 
+The `{date}` in the filename and the `opened_at` field must reflect **when the decision was made**, not when the trace is being captured. This distinction matters.
+
+**How to determine the decision date:**
+
+- **Mode A (thinking with Claude):** The decision is happening now. Use today's date.
+- **Mode B (extracting from pasted text):** Look for date signals in the content — email timestamps, message dates, explicit references like "last Tuesday." Use the most recent date where the decision activity occurred. If no date is apparent, ask: "When did this conversation happen?"
+- **Retroactive capture** (user asks to log decisions from a past session): Ask: "When were these decisions made?" Use that date, not today's date.
+
 ```json
 {
   "id": "dt-{YYYY-MM-DD}-{short-uuid}",
@@ -130,12 +138,13 @@ Each decision is captured as a **thread** containing one or more **nodes**.
   "category": null,
   "project": null,
   "session_id": "sess-{YYYY-MM-DD}-{slug}",
-  "opened_at": "ISO-8601 timestamp",
+  "opened_at": "ISO-8601 timestamp — when the decision was MADE",
   "resolved_at": null,
   "resolution_summary": null,
   "revisit_trigger": null,
   "outcome": null,
   "outcome_assessed_at": null,
+  "captured_at": "ISO-8601 timestamp — when this trace was written",
   "nodes": [
     {
       "id": "dn-{sequence}",
@@ -162,12 +171,14 @@ Each decision is captured as a **thread** containing one or more **nodes**.
 **Thread-level:**
 | Field | Required | Description |
 |-------|----------|-------------|
-| `id` | Yes | Unique ID: `dt-{date}-{4-char-hex}` |
+| `id` | Yes | Unique ID: `dt-{date}-{4-char-hex}` where `{date}` is when the decision was made |
 | `topic` | Yes | Short, scannable label for the decision |
 | `status` | Yes | One of: `open`, `acknowledged`, `contested`, `resolved`, `deferred`, `stale` |
 | `category` | No | One of: `resource_allocation`, `product_scope`, `hiring`, `market_strategy`, `compliance`, `operations`, `partnerships` |
 | `project` | No | Name of the CoWork project or workspace folder this trace belongs to. Auto-populated from the active session context. |
 | `session_id` | Yes | Links to the session that opened this thread |
+| `opened_at` | Yes | When the decision was **made** — not when the trace was captured. Use the actual decision date. |
+| `captured_at` | Yes | When this trace was written to disk. Always today's timestamp. |
 | `resolution_summary` | No | How the decision was resolved — filled when status changes to `resolved` |
 | `revisit_trigger` | No | What condition should reopen this decision (e.g., "if Q3 revenue misses by >20%") |
 | `outcome` | No | What actually happened after the decision — filled later |
