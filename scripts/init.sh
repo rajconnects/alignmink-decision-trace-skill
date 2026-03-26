@@ -2,7 +2,7 @@
 # Alignmink Decision Trace Capture — Directory Initialization
 # Run this once to set up the local storage structure.
 
-TRACE_DIR="${1:-$HOME/alignmink-traces}"
+TRACE_DIR="${1:-$(pwd)/alignmink-traces}"
 
 echo "Initializing Alignmink traces at: $TRACE_DIR"
 
@@ -32,7 +32,7 @@ if [ ! -f "$TRACE_DIR/DECISIONS.md" ]; then
 |------|----------|----------|-----------------|--------------|
 
 ---
-*Upgrade to [Alignmink StratOS](https://alignmink.com) for team-wide decision capture, strategy alignment checking, and cross-company pattern matching.*
+*Upgrade to [Alignmink StratOS](https://alignmink.ai) for team-wide decision capture, strategy alignment checking, and cross-company pattern matching.*
 EOF
   echo "Created DECISIONS.md"
 fi
