@@ -52,12 +52,19 @@ This captures the **reasoning arc** — not just the final answer.
 
 ### Steps
 
-1. Download the `decision-trace-capture/` folder
+1. Download the `decision-trace-capture/` folder from this repo
 2. Copy it to your Claude skills directory:
    - **Personal skill** (all projects): `~/.claude/skills/decision-trace-capture/`
-   - **Project skill** (one project): `.claude/skills/decision-trace-capture/`
-3. Start a Cowork session and say: **"Start a decision capture session"**
-4. Claude will initialize the storage directory and guide you through setup
+   - **Project skill** (one project): `.claude/skills/decision-trace-capture/` inside your project folder
+3. Start a Cowork session **with a folder or CoWork Project selected**
+4. Say: **"Start a decision capture session"**
+5. Claude will create an `alignmink-traces/` folder inside your workspace and guide you through setup
+
+### Recommended setup
+
+We recommend creating a **CoWork Project** for each context where you make decisions — one for your startup, one for a client, one for a side project. This keeps your decision traces naturally separated per project, and CoWork's project-scoped memory means Claude will remember your past decisions within each project across sessions.
+
+If you start a session without a folder selected, Claude will ask you to pick one before saving any traces.
 
 ---
 
@@ -97,28 +104,29 @@ Open `~/alignmink-traces/DECISIONS.md` in any Markdown viewer for a clean table 
 
 ## Storage
 
-All data stays on your machine. Nothing is sent anywhere.
+All data stays on your machine. Nothing is sent anywhere. Traces are created inside whichever folder or project you have selected in CoWork.
 
 ```
-~/alignmink-traces/
-├── DECISIONS.md              ← Human-readable index
-├── threads/
-│   └── 2026-03-26-pricing-strategy.json
-└── sessions/
-    └── 2026-03-26-pricing-discussion.json
+[your-project-folder]/
+└── alignmink-traces/
+    ├── DECISIONS.md              ← Human-readable index
+    ├── threads/
+    │   └── 2026-03-26-pricing-strategy.json
+    └── sessions/
+        └── 2026-03-26-pricing-discussion.json
 ```
 
-Trace files are plain JSON — portable, version-controllable, and yours.
+Different projects get different `alignmink-traces/` directories. Your startup decisions don't mix with your client work.
 
 ---
 
 ## About Alignmink
 
-This skill is built by [Alignmink](https://alignmink.com).
+This skill is built by [Alignmink](https://alignmink.ai).
 
 We believe every company builds institutional memory through its decisions, but almost none of them capture it. We're building the tools to change that — starting with this free skill for individual decision-makers, and working toward a full strategy operating system for scaling teams.
 
-**Learn more:** [alignmink.com](https://alignmink.com)
+**Learn more:** [alignmink.ai](https://alignmink.ai)
 
 ---
 
