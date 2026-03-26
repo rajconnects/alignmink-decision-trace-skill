@@ -63,6 +63,13 @@ Load this reference when you need to verify the format of a trace you're about t
         "session": "GTM strategy discussion",
         "related_topics": ["hiring-plan-q2", "enterprise-pricing"]
       },
+      "reasoning": {
+        "constraints": "No sales infrastructure exists yet — no demo environment, no handoff process. Two-person team can't support both motions simultaneously.",
+        "tradeoffs": "Closing warm pipeline now vs. waiting for infrastructure to be ready. Speed to revenue vs. AE idle time.",
+        "evidence": "3 enterprise deals stalled in 6 weeks due to no human in the loop above $50K ACV.",
+        "alternatives_rejected": "Full PLG (rejected: not converting at enterprise ACV). Hire both AEs immediately (rejected: second AE would be idle 6-8 weeks without demo environment).",
+        "risk_accepted": "First AE starts without full sales infrastructure. If demo environment is late, second hire is delayed and pipeline momentum may stall."
+      },
       "sequence_order": 3,
       "created_at": "2026-03-26T10:42:00Z"
     }
@@ -75,8 +82,9 @@ Load this reference when you need to verify the format of a trace you're about t
 **What makes this a good trace:**
 - Captures Claude's pushback as a proper `response` node — not just the user's monologue
 - Resolution is specific and actionable (names, dates, dollar thresholds)
+- Reasoning surfaces the constraint (no infrastructure), the evidence (3 stalled deals), and the rejected alternatives (full PLG, both AEs at once)
 - Has a revisit trigger — you know when to reopen this
-- Three months from now, the user can ask "why did I hire an AE?" and get the full reasoning
+- Three months from now, the user can ask "why did I hire an AE?" and get the full reasoning arc, not just the outcome
 
 ---
 
@@ -181,6 +189,11 @@ The skill should extract:
       "author_role": "ceo",
       "author_name": "Priya",
       "content": "Agreed to partial migration. Analytics tables to Postgres by June 30. Full migration deferred to Q3.",
+      "reasoning": {
+        "constraints": "API rewrite already consuming engineering bandwidth in Q2. Can't run full migration in parallel.",
+        "tradeoffs": "Full migration now (unblocks everything but high risk) vs. partial migration (lower risk, analytics unblocked, transactional deferred).",
+        "alternatives_rejected": "Full migration by Q2 end — rejected due to timeline conflict with API rewrite."
+      },
       "sequence_order": 3
     }
   ],
