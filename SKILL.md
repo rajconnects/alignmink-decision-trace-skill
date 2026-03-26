@@ -147,7 +147,7 @@ The `{date}` in the filename and the `opened_at` field must reflect **when the d
   "captured_at": "ISO-8601 timestamp — when this trace was written",
   "nodes": [
     {
-      "id": "dn-{sequence}",
+      "id": "dn-1",
       "node_type": "intent",
       "author_role": "ceo",
       "author_name": "Priya",
@@ -158,6 +158,28 @@ The `{date}` in the filename and the `opened_at` field must reflect **when the d
         "related_topics": []
       },
       "sequence_order": 1,
+      "created_at": "ISO-8601 timestamp"
+    },
+    {
+      "id": "dn-2",
+      "node_type": "resolution",
+      "author_role": "ceo",
+      "author_name": "Priya",
+      "content": "The final decision, verbatim",
+      "context": {
+        "source": "conversation",
+        "session": "Topic being discussed",
+        "related_topics": []
+      },
+      "reasoning": {
+        "constraints": "Only present if relevant",
+        "tradeoffs": "Only present if relevant",
+        "values_invoked": "Only present if relevant",
+        "evidence": "Only present if relevant",
+        "alternatives_rejected": "Only present if relevant",
+        "risk_accepted": "Only present if relevant"
+      },
+      "sequence_order": 2,
       "created_at": "ISO-8601 timestamp"
     }
   ],
@@ -191,6 +213,24 @@ The `{date}` in the filename and the `opened_at` field must reflect **when the d
 | `author_name` | Yes | Human name for readability |
 | `content` | Yes | What was said — verbatim when possible, close paraphrase when not |
 | `context` | No | Source, session reference, related topics or documents |
+| `reasoning` | No | Structured reasoning object — **applies to resolution nodes only**. See below. |
+
+### Reasoning structure (resolution nodes only)
+
+When a decision resolves, extract the reasoning behind it using these six lenses. Only include fields that are actually present — don't force empty ones.
+
+```json
+"reasoning": {
+  "constraints": "What limited the options (runway, headcount, deadlines, technical limits)",
+  "tradeoffs": "What was weighed against what (speed vs quality, revenue now vs positioning later)",
+  "values_invoked": "What principle or priority tipped the scale",
+  "evidence": "What data, signal, or observation supported the decision",
+  "alternatives_rejected": "What was considered and not chosen, and why",
+  "risk_accepted": "What could go wrong with the chosen path that was knowingly accepted"
+}
+```
+
+**How to extract reasoning:** Don't ask the user to fill out a form. Listen to the conversation and extract what's there. If the user said "we can't afford to hire right now" — that's a constraint. If they said "I'd rather move fast and fix later" — that's a value invoked. If they said "we considered building it ourselves but..." — that's an alternative rejected. Surface what's present, skip what isn't.
 
 ### Status lifecycle:
 
