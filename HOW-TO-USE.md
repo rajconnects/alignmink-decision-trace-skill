@@ -8,26 +8,30 @@ A practical guide to capturing decisions that actually stick.
 
 Let's get you from zero to your first captured decision. No setup talk, just do this:
 
-**Step 1.** Open Claude Cowork and say:
+**Step 1.** Open Claude Cowork. Select a folder or create a CoWork Project for the work you're doing. This is where your decision traces will live.
+
+**Step 2.** Say:
 
 ```
 Start a decision capture session. I'm [your name], [your role].
 I'm working through [whatever's on your mind].
 ```
 
-That's it. No forms. No config. Just tell Claude what you're thinking about.
+Claude will create an `alignmink-traces/` folder inside your workspace and confirm the path. That's your setup — done.
 
-**Step 2.** Talk through your decision the way you normally would. Think out loud. Weigh the trade-offs. Change your mind. Claude is listening for the moment a direction emerges.
+**Step 3.** Talk through your decision the way you normally would. Think out loud. Weigh the trade-offs. Change your mind. Claude is listening for the moment a direction emerges.
 
-**Step 3.** When Claude spots a decision, it'll check with you:
+**Step 4.** When Claude spots a decision, it'll check with you:
 
 > "I'm capturing a decision: **Whether to raise prices before or after the product launch.** Does that look right?"
 
-Say yes, tweak the framing, or wave it off. Your call.
+Say yes, tweak the framing, or wave it off. Claude saves the trace immediately and confirms where it was saved.
 
-**Step 4.** When you're done, Claude writes the trace to your local files and updates your decision index. You now have a structured record of what you decided, why, and what would make you revisit it.
+**Step 5.** When you're done, Claude summarizes all decisions from the session and updates your decision index. You now have a structured record of what you decided, why, and what would make you revisit it.
 
 That's the whole thing. Everything below is just more ways to use it.
+
+**Tip:** We recommend creating a separate CoWork Project for each context where you make decisions — your startup, a client engagement, a side project. This keeps your decision traces naturally separated, and CoWork's project memory means Claude will remember your past decisions within each project.
 
 ---
 
@@ -135,4 +139,4 @@ If the traces don't exist yet, start building them now. Paste in whatever contex
 
 ---
 
-*Built by [Alignmink](https://alignmink.com). Every decision leaves a trace.*
+*Built by [Alignmink](https://alignmink.ai). Every decision leaves a trace.*
