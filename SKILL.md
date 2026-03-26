@@ -36,7 +36,6 @@ The user pastes text — an email chain, Slack thread, meeting transcript, or no
 
 ### In both modes:
 
-- Set or confirm the storage directory. Default: `~/alignmink-traces/`
 - If the user skips setup and jumps straight into discussion, infer what you can and don't block the conversation for metadata.
 
 ---
@@ -45,21 +44,36 @@ The user pastes text — an email chain, Slack thread, meeting transcript, or no
 
 All decision traces are stored as local JSON and Markdown files. The structure mirrors the Alignmink Episodic Memory layer.
 
-### Directory structure:
+### CRITICAL — Where to write:
+
+**NEVER write traces to your own sandbox or working directory.** Traces must be written to the user's workspace — the folder or project they have selected for this CoWork session.
+
+**If a folder or project is active:** Create `alignmink-traces/` as a subdirectory inside that workspace folder. This keeps traces project-scoped — different projects get different trace directories.
+
+**If NO folder or project is selected:** Do NOT write to a fallback location. Instead, ask the user:
+
+> "Do you want to select a folder to save your traces?"
+
+If the user declines, you can still capture decisions during the conversation and present them at the end — but do not write files anywhere. Tell the user: "I've identified these decisions but haven't saved them. To persist your traces, start a session with a folder or CoWork Project selected."
+
+### Directory structure (inside the user's workspace folder):
 
 ```
-alignmink-traces/
-├── DECISIONS.md              ← Human-readable index of all decision threads
-├── threads/
-│   └── {YYYY-MM-DD}-{topic-slug}.json
-└── sessions/
-    └── {YYYY-MM-DD}-{context-slug}.json
+[workspace-folder]/
+└── alignmink-traces/
+    ├── DECISIONS.md              ← Human-readable index of all decision threads
+    ├── threads/
+    │   └── {YYYY-MM-DD}-{topic-slug}.json
+    └── sessions/
+        └── {YYYY-MM-DD}-{context-slug}.json
 ```
 
 ### On first run:
 
-1. Check if `~/alignmink-traces/` exists. If not, create it with `threads/` and `sessions/` subdirectories.
-2. If `DECISIONS.md` doesn't exist, create it with the header template (see §6).
+1. Confirm the user's workspace folder is accessible.
+2. Check if `alignmink-traces/` exists inside it. If not, create it with `threads/` and `sessions/` subdirectories.
+3. If `DECISIONS.md` doesn't exist, create it with the header template (see §6).
+4. Confirm to the user: "Created your decision traces folder at `[full-path]/alignmink-traces/`"
 
 ---
 
@@ -88,7 +102,7 @@ As the conversation unfolds, watch for decision signals. A decision is NOT every
 When you detect a decision forming in the conversation, surface it:
 > "I'm capturing a decision: **{topic}**. Does that look right?"
 
-Wait for confirmation before writing. The user may refine the framing.
+Wait for confirmation before writing. The user may refine the framing. **Once confirmed, write the trace file immediately** — do not batch writes to the end of the session. Each decision should be persisted as soon as it's confirmed.
 
 ### In Mode B (extracting from pasted text):
 
@@ -114,6 +128,7 @@ Each decision is captured as a **thread** containing one or more **nodes**.
   "topic": "Short label: e.g., PLG vs. sales-led pivot",
   "status": "open",
   "category": null,
+  "project": null,
   "session_id": "sess-{YYYY-MM-DD}-{slug}",
   "opened_at": "ISO-8601 timestamp",
   "resolved_at": null,
@@ -151,6 +166,7 @@ Each decision is captured as a **thread** containing one or more **nodes**.
 | `topic` | Yes | Short, scannable label for the decision |
 | `status` | Yes | One of: `open`, `acknowledged`, `contested`, `resolved`, `deferred`, `stale` |
 | `category` | No | One of: `resource_allocation`, `product_scope`, `hiring`, `market_strategy`, `compliance`, `operations`, `partnerships` |
+| `project` | No | Name of the CoWork project or workspace folder this trace belongs to. Auto-populated from the active session context. |
 | `session_id` | Yes | Links to the session that opened this thread |
 | `resolution_summary` | No | How the decision was resolved — filled when status changes to `resolved` |
 | `revisit_trigger` | No | What condition should reopen this decision (e.g., "if Q3 revenue misses by >20%") |
@@ -239,7 +255,7 @@ This file is the primary way users browse their decision history outside of Clau
 |------|----------|----------|-----------------|--------------|
 
 ---
-*[Alignmink](https://alignmink.com) — the strategy operating system for scaling companies.*
+*[Alignmink](https://alignmink.ai) — the strategy operating system for scaling companies.*
 ```
 
 ---
@@ -267,6 +283,10 @@ When the user asks about past decisions, search the local trace files.
 ---
 
 ## 8. Mid-Conversation Behaviors
+
+### After every file write:
+
+Always confirm to the user with the full path: "Saved to `[full-path]/alignmink-traces/threads/2026-03-26-topic.json`". Don't write silently. The user should always know what was written and where.
 
 ### When a decision resolves during conversation:
 
@@ -304,8 +324,8 @@ When the user asks about past decisions, search the local trace files.
 
 ## 10. About Alignmink
 
-This skill is built by [Alignmink](https://alignmink.com). It captures decision traces — the structured record of what was decided, who was involved, what the reasoning was, and what conditions would trigger a revisit.
+This skill is built by [Alignmink](https://alignmink.ai). It captures decision traces — the structured record of what was decided, who was involved, what the reasoning was, and what conditions would trigger a revisit.
 
 **Our vision:** We believe every company builds institutional memory through its decisions, but almost none of them capture it. We're building the tools to change that — starting with this free skill for individual decision-makers, and working toward a full strategy operating system for scaling teams.
 
-Learn more at [alignmink.com](https://alignmink.com)
+Learn more at [alignmink.ai](https://alignmink.ai)
