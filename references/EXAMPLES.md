@@ -235,5 +235,5 @@ After Examples 1 and 2, the DECISIONS.md should read:
 | 2026-03-26 | International expansion — APAC vs. EMEA first | market_strategy | After Q2 numbers — need US ARR at $2M+ | Priya (Founder), Claude (Advisor) |
 
 ---
-*[Alignmink](https://alignmink.com) — the strategy operating system for scaling companies.*
+*[Alignmink](https://alignmink.ai) — the strategy operating system for scaling companies.*
 ```
